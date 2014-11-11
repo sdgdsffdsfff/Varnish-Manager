@@ -1,0 +1,60 @@
+/*.container {padding-top:80px}*/
+.left {width:20%;float:left}
+.right {width:80%;float:left;padding-left:50px;}
+
+#console {margin-top:30px;}
+#monitor{margin-bottom:30px;min-height:600px;}
+.view .content {border:1px solid #e3e3e3; border-radius: 5px}
+.view .content .thumbnail{min-height: 260px; padding:0px;}
+
+
+/*3/9 布局*/
+
+#span39 .span9 {margin-left:0px;}
+#span39 .span9 .thumbnails{padding-left:5px;}
+#span39 .span9 ul.thumbnails>li{margin-left:2.563102564102564%;}
+
+/*12 布局*/
+#span12 .span12 {margin-left:0px;}
+#span12 .span12 .thumbnails{padding-left:5px; margin-bottom:0px;}
+
+#span12 .span12 .span3{margin-left:0px; margin-right:1.2%; }
+#span12 .span12 .span3 .thumbnail{width:380px; height:400px;}
+#span12 .span12 .span3 .thumbnail .body{height: 300px;}
+
+
+#span12 .row.header{text-align: center;}
+#span12 .row.header .checkStatus{text-align: right;}
+#span12 .row{margin-left:0px; margin-right: 0px;]}
+#span12 .checkUrl .col-lg-12,
+#span12 .purge .col-lg-12 {padding-left:0px;padding-right: 0px;}
+#span12 .span12 {border:1px solid #e3e3e3; border-radius: 5px}
+#span12 .view {padding-top:10px; overflow: hidden;}
+#span12 .thumbnails{ margin-bottom:0px;}
+
+#consoleContainer {margin-bottom:50px;border-color:#ddd;background-color:#fff; border: 1px solid transparent; box-shadow: 0 1px 1px rgba(0,0,0,.05);}
+#consoleContainer .header-title{color: #fff;height: 50px;line-height: 50px;margin-bottom: 10px;padding: 0 15px;background-color:#34495e;border-color:#ddd;border-bottom: 1px solid transparent;border-top-right-radius: 3px;border-top-left-radius: 3px; font-size:16px;}
+#consoleContainer .header-title span{float:left; }
+#consoleContainer .header-title input{width:24px;height:24px;margin-top:12px;margin-right: 5px}
+#consoleContainer .thumbnail.loading .body{opacity: 0.5}
+
+#consoleContainer .thumbnail.loading .progress{display:block;}
+#consoleContainer .thumbnail .progress{display:none; position: relative;top:-150px; width:80%;margin-left: auto; margin-right: auto; margin-bottom:0px;}
+#consoleContainer .thumbnail{position: relative;}
+
+
+
+/*BOOT STRAP OVER WRITE*/
+.well {min-height:500px;}
+.thumbnails{margin-left:-20px;list-style:none;*zoom:1;}.thumbnails:before,.thumbnails:after{display:table;content:"";line-height:0;}
+.thumbnails:after{clear:both;}
+.row-fluid .thumbnails{margin-left:0;}
+.thumbnails>li{float:left;margin-bottom:20px;margin-left:20px;}
+.thumbnail{display:block;padding:4px;line-height:20px;border:1px solid #ddd;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.055);-moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.055);box-shadow:0 1px 3px rgba(0, 0, 0, 0.055);-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out;}
+a.thumbnail:hover,a.thumbnail:focus{border-color:#0088cc;-webkit-box-shadow:0 1px 4px rgba(0, 105, 214, 0.25);-moz-box-shadow:0 1px 4px rgba(0, 105, 214, 0.25);box-shadow:0 1px 4px rgba(0, 105, 214, 0.25);}
+.thumbnail>img{display:block;max-width:100%;margin-left:auto;margin-right:auto;}
+.thumbnail .caption{padding:9px;color:#555555;}
+.progress-info.progress-striped .bar{background-color:#5bc0de;background-image:-webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));background-image:-webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);background-image:-moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);background-image:-o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);background-image:linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);}
+.progress .bar{width:0%;height:100%;color:#ffffff;float:left;font-size:12px;text-align:center;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#0e90d2;background-image:-moz-linear-gradient(top, #149bdf, #0480be);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#149bdf), to(#0480be));background-image:-webkit-linear-gradient(top, #149bdf, #0480be);background-image:-o-linear-gradient(top, #149bdf, #0480be);background-image:linear-gradient(to bottom, #149bdf, #0480be);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff149bdf', endColorstr='#ff0480be', GradientType=0);-webkit-box-shadow:inset 0 -1px 0 rgba(0, 0, 0, 0.15);-moz-box-shadow:inset 0 -1px 0 rgba(0, 0, 0, 0.15);box-shadow:inset 0 -1px 0 rgba(0, 0, 0, 0.15);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-transition:width 0.6s ease;-moz-transition:width 0.6s ease;-o-transition:width 0.6s ease;transition:width 0.6s ease;}
+.progress.active .bar{-webkit-animation: progress-bar-stripes 1s linear infinite;-moz-animation:progress-bar-stripes 2s linear infinite;-ms-animation:progress-bar-stripes 2s linear infinite;-o-animation:progress-bar-stripes 2s linear infinite;animation:progress-bar-stripes 2s linear infinite;}
+.progress-striped .bar{background-color:#149bdf;background-image:-webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));background-image:-webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);background-image:-moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);background-image:-o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);background-image:linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);-webkit-background-size:40px 40px;-moz-background-size:40px 40px;-o-background-size:40px 40px;background-size:40px 40px;}

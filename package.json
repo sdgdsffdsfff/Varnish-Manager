@@ -1,0 +1,9 @@
+{
+  "name": "VarnishManager",
+  "description": "Varnish Management tool",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "request": "2.x"
+  }
+}

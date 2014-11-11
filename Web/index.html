@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="Public/CSS/bootstrap.3.2.0.min.css">
+    <link rel="stylesheet" href="Public/CSS/index.css">
+    <link rel="stylesheet" href="Public/CSS/GooglePretty/prettify.css">
+
+    <script type="text/javascript" src="http://images10.newegg.com/WebResource/Scripts/USA/TP_jQueryPlugin/jquery-1.10.2.min.js?purge=1"></script>
+    <script type="text/javascript" src="Public/Script/GooglePretty/prettify.js"></script>
+
+    <script type="text/javascript" src="/app/ConfigRender"></script>
+    
+</head>
+<body>
+    <div class="container-fluid" id="span12">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <div class="view">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" id="navCheckUrl" class="active"><a href="#">ChedckUrl</a></li>
+                        <li role="presentation" id="navPurge"><a href="#">Purge</a></li>
+                    </ul>
+                </div>
+
+                <div class="view checkUrl">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" id="btnCheckUrl" type="button">CheckUrl</button>
+                            </span>
+                            <input type="text" class="form-control" id='txtCheckUrl' placeHolder="Check url in varnish" value='http://www.newegg3.com.sh/'>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view purge" style="display:none">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger" type="button" id="btnPurge">Purge</button>
+                            </span>
+                            <input type="text" class="form-control" id="txtPurge" placeHolder="Purge url in varnish" value="http://www.newegg3.com.sh/">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="consoleContainer">
+                    
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+    <script>
+        /*Begin Common helper function*/
+        var BuildServerItem = function(server){
+            if(server){
+                return "<li class='span3'><div class='thumbnail' id='##SERVERID##'><div class='row header ##ACTIVE##'><div class='col-xs-12 col-sm-6 col-md-10'>##SERVERNAME##</div><div class='col-xs-6 col-md-2 checkStatus'><input type='checkbox'></div></div><div class='row body'>##MESSAGE##</div><div class='progress progress-striped active progress-info'><div class='bar' style='width: 100%;'></div></div></div></li>".replace("##ACTIVE##",server.alive==0?"bg-primary":(server.alive==1?"bg-success":"bg-danger")).replace("##SERVERNAME##",server.name).replace("##MESSAGE##",server.message).replace("##SERVERID##",server.name);
+            }
+        }
+
+        var BuildConsoleContent = function(location){
+            if(location && location.servers && location.servers.length>0){
+                var locationHeader =  "<div class='header-title'>"+location.name+"<span><input type='checkbox'/></span></div>";
+
+                var locationBody =  "<ul class='thumbnails'>" ;
+                for(var i = 0 , length = location.servers.length; i<length ; i++){
+                    locationBody += BuildServerItem(location.servers[i]);
+                }
+                locationBody+= " </ul>";
+
+                return "<section class='view'>" + locationHeader + locationBody +"</section>";
+            }
+
+            return "";
+        }
+
+        var getAllCheckedServers = function(){
+            return $("#consoleContainer .thumbnail :checked").parents(".thumbnail");
+        }
+
+        var callBack = function(response){
+            var container = $("#" + response.id+" .body");
+            container.html("<pre class='prettyprint lang-js' >" + JSON.stringify(response.data,null ,'\t')+ "</pre>");
+
+            $("#"+response.id).removeClass("loading");
+            if(prettyPrint){prettyPrint();}
+        }
+
+
+        /*End Common helper function*/
+
+        $(document).ready(function(){
+            /*Begin, UI Event binding */
+            $("#navCheckUrl").on("click", function () {
+                $("#navCheckUrl").addClass("active");
+                $("#navPurge").removeClass("active");
+                $(".checkUrl").show();
+                $(".purge").hide();
+            });
+
+            $("#navPurge").on("click", function () {
+                $("#navPurge").addClass("active");
+                $("#navCheckUrl").removeClass("active");
+                $(".purge").show();
+                $(".checkUrl").hide();
+            });
+
+            $("#btnCheckUrl").on("click", function () {
+                $("#btnCheckUrl").attr("disabled", "disabled");
+
+                var allCheckedServers = getAllCheckedServers();
+                
+                for(var i =0, length = allCheckedServers.length; i< length;i++){
+
+                    $.ajax({
+                        url:"/App/CheckUrl?host="+allCheckedServers[i].id+"&url="+$("#txtCheckUrl").val(),
+                        beforeSend:function(){
+                            $("#"+allCheckedServers[i].id).addClass("loading");
+                        }
+                    }).done(function(data){
+                        callBack(data);
+                        $("#btnCheckUrl").removeAttr("disabled");
+
+                    });
+                }
+            });
+
+            $("#btnPurge").on("click", function () {
+                $("#btnPurge").attr("disabled", "disabled");
+
+                var allCheckedServers = getAllCheckedServers();
+                
+                for(var i =0, length = allCheckedServers.length; i< length;i++){
+
+                    $.ajax({
+                        url:"/App/Purge?host="+allCheckedServers[i].id+"&url="+$("#txtPurge").val(),
+                        beforeSend:function(){
+                            $("#"+allCheckedServers[i].id).addClass("loading");
+                        }
+                    }).done(function(data){
+                        console.log(data);
+                        callBack(data);
+                        $("#btnPurge").removeAttr("disabled");
+
+                    });
+                }
+            });
+
+            /*End, UI Event binding */
+
+
+            /*Render server list by config*/
+            var consoleContainer = $("#consoleContainer");
+
+            var consoleBody="";
+            for(var i =0,length=locations.length;i<length; i++){
+                consoleBody += BuildConsoleContent(locations[i]);
+            }
+
+            consoleContainer.append(consoleBody);
+
+            /*Begin bind checkBox event*/
+            $("#consoleContainer .header-title input[type='checkbox']").on("click",function(){
+                var $this = this;
+                $(this).parents("section.view").find(".thumbnails input[type='checkbox']").prop("checked",$this.checked);
+            })
+            /*End bind checkBox event*/
+
+        })
+    </script>
+</body>
+</html>
