@@ -22,7 +22,7 @@ VarnishManager.prototype.GetAllServers = function(){
 }
 
 
-VarnishManager.prototype.getParsedUrl = function(requestUrl, host){
+VarnishManager.prototype.getParsedUrl = function(requestUrl, host, port){
 	if (requestUrl.indexOf('http') !== 0) {
         requestUrl = 'http://' + requestUrl;
     };
@@ -30,7 +30,7 @@ VarnishManager.prototype.getParsedUrl = function(requestUrl, host){
     host = host || urlInfo.hostname;
     var ext = (urlInfo.port ? (':' + urlInfo.port) : "") + (urlInfo.pathname || "") + (urlInfo.query ? ("?" + urlInfo.query) : "");
     return {
-        url: urlInfo.protocol + '//' + host + ext,
+        url: urlInfo.protocol + '//' + host + ':' + port + ext,
         host: urlInfo.hostname
     }
 }
@@ -49,6 +49,9 @@ VarnishManager.prototype.ProcessHandle = function(req,callBack){
 	var destinationServer = instanceConfig.GetServerByName(queryHost);
 
 	switch(pathname.toLowerCase()){
+		case "/app/delete":
+			return this.DeleteUrl(req,destinationUrl,destinationServer,callBack);
+			break;
 		case "/app/gethosts":
 			return this.GetHosts(req);
 			break;
@@ -73,10 +76,41 @@ VarnishManager.prototype.ProcessHandle = function(req,callBack){
 
 VarnishManager.prototype.CheckUrl = function(req, destinationUrl,destinationServer,callBack){
 	
-	var options = this.getParsedUrl(destinationUrl, destinationServer.host);
+	var options = this.getParsedUrl(destinationUrl, destinationServer.host, destinationServer.httpPort);
 
 	this.sendRequest(options,destinationServer.name,callBack);
 }
+
+VarnishManager.prototype.DeleteUrl = function(req, destinationUrl,destinationServer,callBack){
+	
+	var options = this.getParsedUrl(destinationUrl, destinationServer.host, destinationServer.httpPort);
+	var serverID = destinationServer.name;
+
+	request.del({
+		url: options.url,
+		headers:{
+			"host":options.host,
+			"User-Agent": 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+		}
+	},function(error, response, body){
+		var data ; 
+		if(!error){
+			data = {
+				id:serverID,
+				data:response.headers
+			};
+		}
+		else{
+			data = {
+				id:serverID,
+				data:error
+			}
+		}
+
+		callBack(null,JSON.stringify(data));
+	});
+}
+
 
 
 VarnishManager.prototype.RenderConfig= function(callBack){
@@ -96,7 +130,8 @@ VarnishManager.prototype.sendRequest= function(options, serverID,callBack){
 	request.get({
 		url: options.url,
 		headers:{
-			"host":options.host
+			"host":options.host,
+			"User-Agent": 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
 		}
 	},function(error, response, body){
 		var data ; 
@@ -141,7 +176,7 @@ VarnishManager.prototype.Purge= function(destinationUrl,server, callBack){
 	
 	var command = "ban req.url ~ "+url.parse(destinationUrl).path+" && req.http.host ~ "+url.parse(destinationUrl).host;
 
-	var client = new varnish.VarnishClient( server.host, server.port );
+	var client = new varnish.VarnishClient( server.host, server.port, 'varnish' );
 	client.on("ready",function(){
 		client.run_cmd(command,function(){
 			var data = {

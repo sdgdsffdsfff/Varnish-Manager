@@ -2,92 +2,12 @@
     "name":"WebSite_Instance",
     "description":"for www.newegg.com",
     "dataCenters":[{
-        "name":"E3 Location",
+        "name":"Local Test Location",
         "servers":[
             {
-                "name":"E3CAC08",
-                "host":"172.16.16.78",
-                "port":"3500"
-            },
-            {
-                "name":"E3CAC09",
-                "host":"172.16.16.79",
-                "port":"3500"
-            },
-            {
-                "name":"E3CAC10",
-                "host":"172.16.16.80",
-                "port":"3500"
-            },
-            {
-                "name":"E3CAC11",
-                "host":"172.16.16.81",
-                "port":"3500"
-            },
-            {
-                "name":"E3CAC12",
-                "host":"172.16.16.82",
-                "port":"3500"
-            },
-            {
-                "name":"E3CAC13",
-                "host":"172.16.16.83",
-                "port":"3500"
-            },
-            {
-                "name":"E3CAC14",
-                "host":"172.16.16.84",
-                "port":"3500"
-            },
-            {
-                "name":"E3CAC15",
-                "host":"172.16.16.85",
-                "port":"3500"
-            }
-        ]
-    },
-    {
-        "name":"E4 Location",
-        "servers":[
-            {
-                "name":"E4CAC08",
-                "host":"172.16.35.78",
-                "port":"3500"
-            },
-            {
-                "name":"E4CAC09",
-                "host":"172.16.35.79",
-                "port":"3500"
-            },
-            {
-                "name":"E4CAC10",
-                "host":"172.16.35.80",
-                "port":"3500"
-            },
-            {
-                "name":"E4CAC11",
-                "host":"172.16.35.81",
-                "port":"3500"
-            },
-            {
-                "name":"E4CAC12",
-                "host":"172.16.35.82",
-                "port":"3500"
-            },
-            {
-                "name":"E4CAC13",
-                "host":"172.16.35.83",
-                "port":"3500"
-            },
-            {
-                "name":"E4CAC14",
-                "host":"172.16.35.84",
-                "port":"3500"
-            },
-            {
-                "name":"E4CAC15",
-                "host":"172.16.35.85",
-                "port":"3500"
+                "name":"VARTEST01",
+                "host":"10.16.50.207",
+                "port":"3500","httpPort":"3500"
             }
         ]
     }]

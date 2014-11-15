@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,8 +30,9 @@
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" id="btnCheckUrl" type="button">CheckUrl</button>
+                                <button class="btn btn-danger" type="button" style="display:none" id="btnPurge">Purge</button>
                             </span>
-                            <input type="text" class="form-control" id='txtCheckUrl' placeHolder="Check url in varnish" value='http://www.newegg3.com.sh/'>
+                            <input type="text" class="form-control" id='txtInputUrl' placeHolder="Check url in varnish" value='http://www.newegg3.com.sh/'>
                         </div>
                     </div>
                 </div>
@@ -40,7 +42,7 @@
                         <div class="input-group">
                             
                             <span class="input-group-btn">
-                                <button class="btn btn-danger" type="button" id="btnPurge">Purge</button>
+                                
                             </span>
                             <input type="text" class="form-control" id="txtPurge" placeHolder="Purge url in varnish" value="http://www.newegg3.com.sh/">
                         </div>
@@ -100,15 +102,17 @@
             $("#navCheckUrl").on("click", function () {
                 $("#navCheckUrl").addClass("active");
                 $("#navPurge").removeClass("active");
-                $(".checkUrl").show();
-                $(".purge").hide();
+
+                $("#btnCheckUrl").show();
+                $("#btnPurge").hide();
             });
 
             $("#navPurge").on("click", function () {
                 $("#navPurge").addClass("active");
                 $("#navCheckUrl").removeClass("active");
-                $(".purge").show();
-                $(".checkUrl").hide();
+
+                $("#btnCheckUrl").hide();
+                $("#btnPurge").show();
             });
 
             $("#btnCheckUrl").on("click", function () {
@@ -119,7 +123,7 @@
                 for(var i =0, length = allCheckedServers.length; i< length;i++){
 
                     $.ajax({
-                        url:"/App/CheckUrl?host="+allCheckedServers[i].id+"&url="+$("#txtCheckUrl").val(),
+                        url:"/App/CheckUrl?host="+allCheckedServers[i].id+"&url="+encodeURIComponent($("#txtInputUrl").val()),
                         beforeSend:function(){
                             $("#"+allCheckedServers[i].id).addClass("loading");
                         }
@@ -139,7 +143,7 @@
                 for(var i =0, length = allCheckedServers.length; i< length;i++){
 
                     $.ajax({
-                        url:"/App/Purge?host="+allCheckedServers[i].id+"&url="+$("#txtPurge").val(),
+                        url:"/App/delete?host="+allCheckedServers[i].id+"&url="+encodeURIComponent($("#txtInputUrl").val()),
                         beforeSend:function(){
                             $("#"+allCheckedServers[i].id).addClass("loading");
                         }

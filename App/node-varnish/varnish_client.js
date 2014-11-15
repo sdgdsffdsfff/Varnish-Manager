@@ -27,6 +27,7 @@ function VarnishClient(host, port, secret, ready_callback) {
         log("VARNISH: connection");
         ready = false;
         if(!client) {
+            log("VARNISH:connecting",port,host);
             client = net.createConnection(port, host);
             client.on('connect', function () {
                 log("VARNISH: connected");
