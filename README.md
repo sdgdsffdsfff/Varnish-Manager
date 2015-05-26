@@ -3,3 +3,4 @@
 
 ## 结构图
 
+![image](https://raw.githubusercontent.com/bcguan2008/Varnish-Manager/master/document/VarnishManager.jpg)
