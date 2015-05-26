@@ -1,0 +1,61 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', 'forever', '-g' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink /usr/bin/node
+5 verbose cache add [ 'forever', null ]
+6 verbose cache add name=undefined spec="forever" args=["forever",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'forever',
+7 verbose parsed url   path: 'forever',
+7 verbose parsed url   href: 'forever' }
+8 silly lockFile e07f8c4a-forever forever
+9 verbose lock forever /root/.npm/e07f8c4a-forever.lock
+10 silly lockFile e07f8c4a-forever forever
+11 silly lockFile e07f8c4a-forever forever
+12 verbose addNamed [ 'forever', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile 28ef027b-forever forever@
+15 verbose lock forever@ /root/.npm/28ef027b-forever.lock
+16 silly addNameRange { name: 'forever', range: '*', hasData: false }
+17 verbose request where is /forever
+18 verbose request registry http://registry.cnpmjs.org/
+19 verbose request id 7d6797f715fc383c
+20 verbose url raw /forever
+21 verbose url resolving [ 'http://registry.cnpmjs.org/', './forever' ]
+22 verbose url resolved http://registry.cnpmjs.org/forever
+23 verbose request where is http://registry.cnpmjs.org/forever
+24 info trying registry request attempt 1 at 16:17:32
+25 http GET http://registry.cnpmjs.org/forever
+26 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+27 info trying registry request attempt 2 at 16:18:45
+28 http GET http://registry.cnpmjs.org/forever
+29 info retry will retry, error on last attempt: Error: connect ETIMEDOUT
+30 info trying registry request attempt 3 at 16:20:48
+31 http GET http://registry.cnpmjs.org/forever
+32 silly lockFile 28ef027b-forever forever@
+33 silly lockFile 28ef027b-forever forever@
+34 error network connect ETIMEDOUT
+34 error network This is most likely not a problem with npm itself
+34 error network and is related to network connectivity.
+34 error network In most cases you are behind a proxy or have bad network settings.
+34 error network
+34 error network If you are behind a proxy, please make sure that the
+34 error network 'proxy' config is set properly.  See: 'npm help config'
+35 error System Linux 2.6.32-358.el6.x86_64
+36 error command "/usr/bin/node" "/usr/bin/npm" "install" "forever" "-g"
+37 error cwd /usr/Node/varnishmanager
+38 error node -v v0.10.33
+39 error npm -v 1.4.28
+40 error syscall connect
+41 error code ETIMEDOUT
+42 error errno ETIMEDOUT
+43 verbose exit [ 1, true ]

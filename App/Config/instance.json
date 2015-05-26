@@ -7,7 +7,7 @@
             {
                 "name":"VARTEST01",
                 "host":"10.16.50.207",
-                "port":"3500","httpPort":"3500"
+                "port":"3500","httpPort":"80"
             }
         ]
     }]

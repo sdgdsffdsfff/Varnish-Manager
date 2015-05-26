@@ -116,10 +116,16 @@
             });
 
             $("#btnCheckUrl").on("click", function () {
-                $("#btnCheckUrl").attr("disabled", "disabled");
 
                 var allCheckedServers = getAllCheckedServers();
-                
+
+                if(!allCheckedServers || allCheckedServers.length<=0){
+                    alert("Please select a server at least.");
+                    return ;
+                }
+
+                $("#btnCheckUrl").attr("disabled", "disabled");
+
                 for(var i =0, length = allCheckedServers.length; i< length;i++){
 
                     $.ajax({
@@ -136,9 +142,14 @@
             });
 
             $("#btnPurge").on("click", function () {
-                $("#btnPurge").attr("disabled", "disabled");
-
                 var allCheckedServers = getAllCheckedServers();
+
+                if(!allCheckedServers || allCheckedServers.length<=0){
+                    alert("Please select a server at least.");
+                    return ;
+                }
+
+                $("#btnPurge").attr("disabled", "disabled");
                 
                 for(var i =0, length = allCheckedServers.length; i< length;i++){
 

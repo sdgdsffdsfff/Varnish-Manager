@@ -77,7 +77,6 @@ VarnishManager.prototype.ProcessHandle = function(req,callBack){
 VarnishManager.prototype.CheckUrl = function(req, destinationUrl,destinationServer,callBack){
 	
 	var options = this.getParsedUrl(destinationUrl, destinationServer.host, destinationServer.httpPort);
-
 	this.sendRequest(options,destinationServer.name,callBack);
 }
 
@@ -127,7 +126,8 @@ VarnishManager.prototype.RenderConfig= function(callBack){
 }
 
 VarnishManager.prototype.sendRequest= function(options, serverID,callBack){
-	request.get({
+	console.log(options.host);
+        request.get({
 		url: options.url,
 		headers:{
 			"host":options.host,
